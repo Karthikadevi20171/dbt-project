@@ -21,7 +21,7 @@ models:
         description: '{{doc("customer_id_in_HUB_CUSTOMER_in_HUB")}}'
         tests:
           - relationships:
-              to: ref('STAGE_CUSTOMER')
+              to: BT_DB.STAGE.STAGE_CUSTOMER
               field: customer_id
       - name: load_dts
         description: '{{doc("load_dts_in_HUB_CUSTOMER_in_HUB")}}'
