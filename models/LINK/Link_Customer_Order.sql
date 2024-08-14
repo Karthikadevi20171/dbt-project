@@ -7,8 +7,9 @@ Revision Date       User          Comment
 -#}
 {{-
     config(
-       materialized="incremental",
-	   unique_key = "customer_order_hk"
+       schema = 'LINK',
+	   materialized='incremental',
+	   unique_key = 'customer_order_hk'
     )
 -}}
 
@@ -20,7 +21,7 @@ with
         MD5(order_id) AS order_hk,
         current_timestamp() as load_dts,
         src as Source           
-        from DBT_DB.STAGE.STAGE_ORDER 
+        from {{ source('SRC_ORDER', 'STAGE_ORDER')}} 
 		          )
         
 select
@@ -30,3 +31,11 @@ select
     load_dts,
     source
     from cus_ord_cte
+	
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  -- (uses >= to include records whose timestamp occurred since the last run of this model)
+where load_dts >= (select max(load_dts)) from {{ this }} )
+
+{% endif %}

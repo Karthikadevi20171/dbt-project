@@ -4,12 +4,11 @@ models:
   - name: HUB_CUSTOMER
     description: '{{doc("HUB_CUSTOMER_in_HUB")}}'
     config:
-      tags: ['Refresh=Daily', 'Full Refresh']
+      tags: ['Refresh=Daily']
       meta:
         data classification: 'Internal'
         natural key: 'customer_id'
         primary keys: 'customer_HK'
-        refresh method: 'Full Refresh'
         refresh interval: 'Refresh=Daily'
     columns:
       - name: customer_HK
@@ -21,8 +20,9 @@ models:
         description: '{{doc("customer_id_in_HUB_CUSTOMER_in_HUB")}}'
         tests:
           - relationships:
-              to: BT_DB.STAGE.STAGE_CUSTOMER
+              to: DBT_DB.STAGE.STAGE_CUSTOMER
               field: customer_id
+          - generic_test
       - name: load_dts
         description: '{{doc("load_dts_in_HUB_CUSTOMER_in_HUB")}}'
       - name: source

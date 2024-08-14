@@ -1,0 +1,17 @@
+
+version: 2
+
+sources:
+  - name: SRC_CUSTOMER
+    database: DBT_DB
+    schema: STAGE
+    tables:
+      - name: STAGE_CUSTOMER   
+      
+  - name: SRC_ORDER
+    database: DBT_DB
+    schema: STAGE
+    tables:
+      - name: STAGE_ORDER  
+    
+     
