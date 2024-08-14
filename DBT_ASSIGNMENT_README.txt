@@ -11,7 +11,7 @@
 DBT_DB.STAGE.STAGE_CUSTOMER
 DBT_DB.STAGE.STAGE_ORDER
 
-### DBT Models creation:
+### DBT Models creation and override default schema:
 
 - Created the below DBT models, yml and md files.
   HUB_CUSTOMER.sql
@@ -20,13 +20,16 @@ DBT_DB.STAGE.STAGE_ORDER
   HUB_CUSTOMER.yml
   HUB_CUSTOMER.md
   
+### Incremental models:
+Models were created to load the data in incremental way based on unique key columns and it will check for rows created or modified since the last time dbt ran this model.
+
 ### DBT log:
 
 All three DBT models has been created and executed successfully and the logs are stored in dbt.logs
 
 ### DBT tests:
 
-The test (unique, not-null and referential integrity) has been performed on the primary_key columns and it has been tested successfully.
+The test (unique, not-null, referential integrity and custom tests) has been performed on the primary_key columns and it has been tested successfully.
 
 ### DBT Document generation:
 
